@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
@@ -82,10 +83,26 @@ class MyHomePage extends StatelessWidget {
         elevation: 0.01,
 
       ),
-      body: const Center(
-        child: Text(
-          "Hello World",
-          style : TextStyle(fontSize : 30.0)
+      body:  Center(
+        child: RichText(
+          overflow: TextOverflow.ellipsis,
+
+          textAlign: TextAlign.end,
+
+          // Control text direction
+          textDirection: TextDirection.rtl,
+
+          softWrap: true,
+          maxLines: 1,
+          
+          text : TextSpan( 
+            text : "Hello",
+            style: DefaultTextStyle.of(context).style,
+            children: const <TextSpan>[
+              TextSpan(text: "Dhanshri", style: TextStyle(fontWeight: FontWeight.bold)),
+            ]
+
+          ),
           ),
       ),
 
@@ -124,5 +141,18 @@ class MyHomePage extends StatelessWidget {
           )
       ),
     );
+  }
+}
+
+
+class MyClip extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return const Rect.fromLTWH(0, 0, 100, 100);
+  }
+ 
+  @override
+  bool shouldReclip(oldClipper) {
+    return false;
   }
 }
