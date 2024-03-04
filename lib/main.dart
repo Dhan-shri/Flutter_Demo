@@ -1,19 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
   final appTitle = "Dhanshri";
   const MyApp({super.key});
-  
 
   // This widget is the root of your application.
   @override
@@ -35,7 +31,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
-  final GlobalKey<ExpansionTileCardState> cardA =  GlobalKey();
+  final GlobalKey<ExpansionTileCardState> cardA = GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardB = GlobalKey();
   // ignore: use_super_parameters
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -46,7 +42,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("dhanshri"),
         // action button
-        actions : <Widget>[
+        actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.comment),
             tooltip: 'Comment Icon',
@@ -87,71 +83,94 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
         elevation: 0.01,
-
       ),
       body: ListView(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: ExpansionTileCard( 
-                  title: const Text("Tap to Expand!"),
-                  leading: const Icon(Icons.arrow_drop_down_circle),
-                  subtitle: const Text("It has the Logo"),
-                  key: cardA,
-                  children: <Widget>[
-                  const  Divider(
-                      thickness: 5.0,
-                      height: 5.0,
-                    ),
-                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Image.asset('assets/images/evening.jpg'),
-                      ),
-                    ),
-                    
-                  ],
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: ExpansionTileCard(
+              title: const Text("Tap to Expand!"),
+              leading: const Icon(Icons.arrow_drop_down_circle),
+              subtitle: const Text("It has the Logo"),
+              key: cardA,
+              children: <Widget>[
+                const Divider(
+                  thickness: 5.0,
+                  height: 5.0,
                 ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Image.asset('assets/images/evening.jpg'),
+                  ),
                 ),
-            ],
+              ],
+            ),
           ),
-
-
-      drawer: Drawer(
-        child:  ListView(
-          padding: const EdgeInsets.all(0) ,
-          children: const [
-             DrawerHeader(
-              decoration:  BoxDecoration(
-                color: Colors.green,
-              ),
-              child : UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Colors.green),
-                accountName: Text("Dhanshri Sonwane", style: TextStyle(fontSize : 18)),
-                accountEmail: Text("Dhanshri9545@gmail.com"),
-                currentAccountPictureSize: Size.square(50),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 165, 255, 137),
-                  child: Text("D", style: TextStyle(fontSize: 40.0)),
-                ),
-              ),
-              ),
-              ListTile(
-                title: Text("Home"),
-                leading: Icon(Icons.home),
-              ),
-              ListTile(
-                title: Text("Profile"),
-                leading: Icon(Icons.person),
-              ),
-              ListTile(
-                title: Text("Settings"),
-                leading: Icon(Icons.settings),
-              ),
-          ],
-          )
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Alert Dialog'),
+                    content: const Text('Button Clicked!'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green),
+              padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
+              fixedSize: MaterialStateProperty.all(const Size(50, 50)), // Add width and height here
+            ),
+            child: const Text("Click Me"),
+          ),
+        ],
       ),
+      drawer: Drawer(
+          child: ListView(
+        padding: const EdgeInsets.all(0),
+        children: const [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.green,
+            ),
+            child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.green),
+              accountName:
+                  Text("Dhanshri Sonwane", style: TextStyle(fontSize: 18)),
+              accountEmail: Text("Dhanshri9545@gmail.com"),
+              currentAccountPictureSize: Size.square(50),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 165, 255, 137),
+                child: Text("D", style: TextStyle(fontSize: 40.0)),
+              ),
+            ),
+          ),
+          ListTile(
+            title: Text("Home"),
+            leading: Icon(Icons.home),
+          ),
+          ListTile(
+            title: Text("Profile"),
+            leading: Icon(Icons.person),
+          ),
+          ListTile(
+            title: Text("Settings"),
+            leading: Icon(Icons.settings),
+          ),
+        ],
+      )),
     );
   }
 
@@ -167,27 +186,26 @@ class MyHomePage extends StatelessWidget {
 
         softWrap: true,
         maxLines: 1,
-        
-        text : TextSpan( 
-          text : "Hello",
-          style: DefaultTextStyle.of(context).style,
-          children: const <TextSpan>[
-            TextSpan(text: "Dhanshri", style: TextStyle(fontWeight: FontWeight.bold)),
-          ]
 
-        ),
-        ),
+        text: TextSpan(
+            text: "Hello",
+            style: DefaultTextStyle.of(context).style,
+            children: const <TextSpan>[
+              TextSpan(
+                  text: "Dhanshri",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+            ]),
+      ),
     );
   }
 }
-
 
 class MyClip extends CustomClipper<Rect> {
   @override
   Rect getClip(Size size) {
     return const Rect.fromLTWH(0, 0, 100, 100);
   }
- 
+
   @override
   bool shouldReclip(oldClipper) {
     return false;
