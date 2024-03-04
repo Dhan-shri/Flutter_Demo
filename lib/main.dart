@@ -1,14 +1,19 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
+
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   final appTitle = "Dhanshri";
   const MyApp({super.key});
+  
 
   // This widget is the root of your application.
   @override
@@ -30,8 +35,10 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
+  final GlobalKey<ExpansionTileCardState> cardA =  GlobalKey();
+  final GlobalKey<ExpansionTileCardState> cardB = GlobalKey();
   // ignore: use_super_parameters
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,28 +89,34 @@ class MyHomePage extends StatelessWidget {
         elevation: 0.01,
 
       ),
-      body:  Center(
-        child: RichText(
-          overflow: TextOverflow.ellipsis,
-
-          textAlign: TextAlign.end,
-
-          // Control text direction
-          textDirection: TextDirection.rtl,
-
-          softWrap: true,
-          maxLines: 1,
-          
-          text : TextSpan( 
-            text : "Hello",
-            style: DefaultTextStyle.of(context).style,
-            children: const <TextSpan>[
-              TextSpan(text: "Dhanshri", style: TextStyle(fontWeight: FontWeight.bold)),
-            ]
-
+      body: ListView(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: ExpansionTileCard( 
+                  title: const Text("Tap to Expand!"),
+                  leading: const Icon(Icons.arrow_drop_down_circle),
+                  subtitle: const Text("It has the Logo"),
+                  key: cardA,
+                  children: <Widget>[
+                  const  Divider(
+                      thickness: 5.0,
+                      height: 5.0,
+                    ),
+                     Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Image.asset('assets/images/evening.jpg'),
+                      ),
+                    ),
+                    
+                  ],
+                ),
+                ),
+            ],
           ),
-          ),
-      ),
+
 
       drawer: Drawer(
         child:  ListView(
@@ -139,6 +152,31 @@ class MyHomePage extends StatelessWidget {
           ],
           )
       ),
+    );
+  }
+
+  Center richText(BuildContext context) {
+    return Center(
+      child: RichText(
+        overflow: TextOverflow.ellipsis,
+
+        textAlign: TextAlign.end,
+
+        // Control text direction
+        textDirection: TextDirection.rtl,
+
+        softWrap: true,
+        maxLines: 1,
+        
+        text : TextSpan( 
+          text : "Hello",
+          style: DefaultTextStyle.of(context).style,
+          children: const <TextSpan>[
+            TextSpan(text: "Dhanshri", style: TextStyle(fontWeight: FontWeight.bold)),
+          ]
+
+        ),
+        ),
     );
   }
 }
